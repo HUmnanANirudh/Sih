@@ -1,11 +1,9 @@
-const mongoose = require("mongoose");
+const  mongoose = require("mongoose")
 const { Schema } = mongoose;
-const { MONGO_URI } = require("../config/config");
 
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+connect(
+  "mongodb+srv://tanirudhganesh:valtisbest@cluster0.gntytop.mongodb.net/"
+);
 const userSchema = new Schema({
   Firstname: { type: String, required: true },
   Lastname: { type: String },
@@ -26,9 +24,9 @@ userSchema.methods.createHash = async function (plainTextPassword) {
 // Saving password with stored hash and hash function
 userSchema.methods.validatePassword = async function (candidatePassword) {
   return await compare(candidatePassword, this.password);
-};
+}
 /////////-**************-//////////
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = { User };
+module.exports = {User};

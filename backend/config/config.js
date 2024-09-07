@@ -1,5 +1,3 @@
-require("dotenv").config();
-module.exports = {
-  MONGO_URI: process.env.MONGO_URI,
-  JWT_SECRET: process.env.JWT_SECRET,
-};
+const JWT_SECRET = "f8Nr4P&zV3$wQsT7!mY2*Rk#L9@dXrVp"
+
+model.export = JWT_SECRET; 
