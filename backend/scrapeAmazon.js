@@ -20,9 +20,7 @@ async function connectDB() {
 
 async function scrapeAmazonProducts() {
   const urls = [
-    "https://www.amazon.in/s?k=indian+natural+scent&crid=3HC8YX5JXREO5&sprefix=%2Caps%2C197&ref=nb_sb_ss_recent_10_0_recent",
-    "https://www.amazon.in/s?k=indian+natural&crid=2J31DR45RMKYX&sprefix=indian+natural%2Caps%2C205&ref=nb_sb_noss_2",
-    "https://www.amazon.in/s?k=natural+oil&crid=2OUR6FMUYVKFV&sprefix=natural+oil%2Caps%2C209&ref=nb_sb_noss_1",
+    ''
   ];
 
   const browser = await puppeteer.launch({

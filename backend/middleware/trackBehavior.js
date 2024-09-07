@@ -12,7 +12,7 @@ const trackBehavior = async (req, res, next) => {
             ip: req.ip
         };
 
-        // Save behavior data to database
+        
         const behavior = new UserBehavior(behaviorData);
         await behavior.save();
 

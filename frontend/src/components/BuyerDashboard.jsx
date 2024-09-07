@@ -1,33 +1,44 @@
 import { useState, useEffect } from "react";
+import Navbar from './Navbar';
 import axios from "axios";
-import Navbar from "./components/Navbar";
 
 function BuyerDashboard() {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     axios
       .get("/api/v1/products")
       .then((response) => {
         setProducts(response.data);
+        
+        setLoading(false);
       })
       .catch((error) => {
-        console.error("There was an error fetching the products!", error);
+        setError("There was an error fetching the products!");
+        setLoading(false);
       });
   }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .get(`/api/v1/products?search=${searchQuery}`)
       .then((response) => {
         setProducts(response.data);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error("There was an error searching the products!", error);
+        setError("There was an error searching the products!");
+        setLoading(false);
       });
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div>
@@ -42,15 +53,19 @@ function BuyerDashboard() {
           />
           <button type="submit">Search</button>
         </form>
-        <div className="products">
-          {products.map((product) => (
-            <div key={product._id} className="product-card">
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p>{product.description}</p>
-              <p>${product.price}</p>
-            </div>
-          ))}
+        <div>
+          {products.length > 0 ? (
+            products.map((products) => (
+              <div key={products._id}>
+                <img src={products.image} alt={products.title} />
+                <h3>{products.title}</h3>
+                <p>{products.description}</p>
+                <p>${products.price}</p>
+              </div>
+            ))
+          ) : (
+            <p>No products found</p>
+          )}
         </div>
       </div>
     </div>
