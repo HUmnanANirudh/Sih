@@ -1,5 +1,4 @@
-import JWT_SECRET from "../config/config";
-
+const JWT_SECRET = require("../config/config")
 const jwt = require("jsonwebtoken");
 
 const roleauth = (roles) => {

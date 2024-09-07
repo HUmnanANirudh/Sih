@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/product");
 const getRecommendations = require('../services/recommendation');
+const auth = require("../middleware/middleware")
 
 router.get("/products", async (req, res) => {
   try {

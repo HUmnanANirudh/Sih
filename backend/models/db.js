@@ -1,7 +1,7 @@
 const  mongoose = require("mongoose")
 const { Schema } = mongoose;
 
-connect(
+mongoose.connect(
   "mongodb+srv://tanirudhganesh:valtisbest@cluster0.gntytop.mongodb.net/"
 );
 const userSchema = new Schema({
@@ -29,4 +29,4 @@ userSchema.methods.validatePassword = async function (candidatePassword) {
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = {User};
+module.exports = User;
