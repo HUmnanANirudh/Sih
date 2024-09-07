@@ -1,75 +1,50 @@
 import { useState, useEffect } from "react";
-import Navbar from './Navbar';
 import axios from "axios";
+import Navbar from './Navbar';
 
 function BuyerDashboard() {
-  const [products, setProducts] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get("/api/v1/products")
-      .then((response) => {
-        setProducts(response.data);
-        
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError("There was an error fetching the products!");
-        setLoading(false);
-      });
-  }, []);
+    useEffect(() => {
+        axios.get("http://localhost:6969/api/v1/buyer/products?page=1&limit=100")
+            .then((res) => {
+                console.log("Response data:", res.data); // Log response data
+                setProducts(res.data.products || []);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("There was an error fetching the products!", error);
+                setError("Failed to load products.");
+                setLoading(false);
+            });
+    }, []);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    axios
-      .get(`/api/v1/products?search=${searchQuery}`)
-      .then((response) => {
-        setProducts(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError("There was an error searching the products!");
-        setLoading(false);
-      });
-  };
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
-
-  return (
-    <div>
-      <Navbar />
-      <div className="container">
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search for products..."
-          />
-          <button type="submit">Search</button>
-        </form>
+    return (
         <div>
-          {products.length > 0 ? (
-            products.map((products) => (
-              <div key={products._id}>
-                <img src={products.image} alt={products.title} />
-                <h3>{products.title}</h3>
-                <p>{products.description}</p>
-                <p>${products.price}</p>
-              </div>
-            ))
-          ) : (
-            <p>No products found</p>
-          )}
+            <Navbar />
+            <div className="container">
+                {products.length === 0 ? (
+                    <div>No products available.</div>
+                ) : (
+                    <div className="products">
+                        {products.map((product) => (
+                            <div key={product._id} className="product-card">
+                                <img src={product.image} alt={product.title} />
+                                <h3>{product.title}</h3>
+                                <p>{product.description}</p>
+                                <p>₹{product.price}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default BuyerDashboard;

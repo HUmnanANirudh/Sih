@@ -6,7 +6,7 @@ const auth = require("../middleware/middleware")
 
 router.post("/products", async (req, res) => {
   const { title, image, price, description } = req.body;
-
+  
   try {
     const newProduct = new Product({ title, image, price, description });
     await newProduct.save();

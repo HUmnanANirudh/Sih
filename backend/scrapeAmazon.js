@@ -3,7 +3,6 @@ const puppeteer = require("puppeteer");
 const Product = require("../backend/models/product");
 const mongoose = require("mongoose");
 
-
 async function connectDB() {
   try {
     await mongoose.connect( "mongodb+srv://tanirudhganesh:valtisbest@cluster0.gntytop.mongodb.net/" ,{
