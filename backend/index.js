@@ -5,12 +5,13 @@ const port = 6969;
 const app = express();
 const cors = require("cors");
 
-const trackBehavior = require('./middleware/trackBehavior');
+
 const mainrouter = require("./router/index");
 const buyerrouter = require("./router/buyer");
 const sellerrouter = require("./router/seller");
 const adminrouter = require("./router/admin");
 const trackLocation = require('./middleware/tracklocation');
+const trackBehavior = require('./middleware/trackBehavior');
 
 app.use(cors());
 app.use(express.json());

@@ -5,7 +5,7 @@ const getRecommendations = require("../services/recommendation");
 const auth = require("../middleware/middleware");
 
 router.get("/products", async (req, res) => {
-  const { page = 1, limit = 100 } = req.query; // Default to page 1 and limit 20
+  const { page = 1, limit = 20 } = req.query; 
   const skip = (page - 1) * limit;
   try {
     const products = await Product.find().skip(skip).limit(parseInt(limit));

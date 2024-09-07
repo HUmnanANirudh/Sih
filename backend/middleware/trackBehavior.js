@@ -9,7 +9,8 @@ const trackBehavior = async (req, res, next) => {
             method: req.method,
             timestamp: new Date(),
             userAgent: req.headers['user-agent'],
-            ip: req.ip
+            ip: req.ip,
+            userLocation: req.userLocation
         };
 
         
