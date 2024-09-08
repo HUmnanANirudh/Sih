@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  BrowserRouter as Router, // This will act as your Router
+  BrowserRouter as Router, 
   Routes,
   Route,
 } from "react-router-dom";
-
+import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import BuyerDashboard from "./pages/BuyerDashboard";
 import Homepage from "./pages/Homepage";
@@ -18,6 +18,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/login" element={<Login/>} />
         <Route path="/" element={<Homepage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/buyer" element={<BuyerDashboard />} />

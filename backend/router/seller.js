@@ -8,7 +8,13 @@ router.post("/products", async (req, res) => {
   const { title, image, price, description } = req.body;
   
   try {
-    const newProduct = new Product({ title, image, price, description });
+    const newProduct = new Product({
+      title,
+      image,
+      price,
+      description,
+      sellerId: req.userId, 
+    });
     await newProduct.save();
     res.status(201).json({ message: "Product created", newProduct });
   } catch (error) {
@@ -21,13 +27,18 @@ router.put("/products/:id", async (req, res) => {
   const { title, image, price, description } = req.body;
 
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(id, { title, image, price, description }, { new: true });
+    const updatedProduct = await Product.findByIdAndUpdate(id, {
+      title,
+      image,
+      price,
+      description,
+      sellerId: req.userId,
+    }, { new: true });
     res.status(200).json({ message: "Product updated", updatedProduct });
   } catch (error) {
     res.status(500).json({ message: "Error updating product", error });
   }
 });
-
 router.delete("/products/:id", async (req, res) => {
   const { id } = req.params;
 

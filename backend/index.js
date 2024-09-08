@@ -12,6 +12,7 @@ const sellerrouter = require("./router/seller");
 const adminrouter = require("./router/admin");
 const trackLocation = require('./middleware/tracklocation');
 const trackBehavior = require('./middleware/trackBehavior');
+const authRouter = require("./middleware/auth");
 
 app.use(cors());
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use("/api/v1", mainrouter);
 app.use("/api/v1/buyer", buyerrouter);
 app.use("/api/v1/seller", sellerrouter);
 app.use("/api/v1/admin", adminrouter);
+app.use("/api/v1/auth", authRouter); 
 
 
 app.listen(port);

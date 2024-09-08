@@ -44,7 +44,6 @@ function BuyerDashboard() {
 
   return (
     <div>
-      <Navbar />
       <div className="container mx-auto p-4">
         {products.length === 0 ? (
           <div>No products available.</div>
@@ -56,7 +55,7 @@ function BuyerDashboard() {
                 className="bg-white p-4 rounded-lg shadow-md cursor-pointer"
                 onClick={() => handleProductClick(product)}
               >
-                <img src={product.image} alt={product.title} className="w-full h-40 object-cover mb-4 rounded"/>
+                <img src={product.image} alt={product.title} className="w-full h-40 object-contain mb-4 rounded"/>
                 <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
                 <p className="text-sm text-gray-600 mb-2">{product.description}</p>
                 <p className="text-lg font-bold">₹{product.price}</p>

@@ -4,7 +4,6 @@ async function trackLocation(req, res, next) {
   let userLocation = {};
 
   if (req.body.coords) {
-    
     userLocation = {
       latitude: req.body.coords.latitude,
       longitude: req.body.coords.longitude,
