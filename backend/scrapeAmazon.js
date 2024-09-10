@@ -2,10 +2,11 @@ require("dotenv").config();
 const puppeteer = require("puppeteer");
 const Product = require("../backend/models/product");
 const mongoose = require("mongoose");
+const { MONGO_URI } = require('./config/config');
 
 async function connectDB() {
   try {
-    await mongoose.connect( "mongodb+srv://tanirudhganesh:valtisbest@cluster0.gntytop.mongodb.net/" ,{
+    await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 30000,

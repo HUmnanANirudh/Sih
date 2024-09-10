@@ -1,3 +1,7 @@
-const JWT_SECRET = "f8Nr4P&zV3$wQsT7!mY2*Rk#L9@dXrVp"
-
-module.exports = JWT_SECRET; 
+require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
+module.exports = {
+  MONGO_URI: process.env.MONGO_URI,
+  JWT_SECRET: process.env.JWT_SECRET,
+};
